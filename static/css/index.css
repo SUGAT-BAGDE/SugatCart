@@ -28,9 +28,11 @@ h1{
     align-items: center;
     width: 16rem;
     box-shadow: 0.1vw 0.1vw 0.3vw grey;
-    margin: 0.5vw;
+    margin: 0.2rem;
     padding: 0.5vw;
     cursor: pointer;
+    min-width: 220px;
+    min-height: 40vh;
 }
 .product-card h5{
     text-align: center;
@@ -38,7 +40,7 @@ h1{
     margin-bottom: 0.5vw;
 }
 .product-card img{
-    width: 6rem;
+    width: 8rem;
     margin: 0.3vw;
 }
 #mobile-nav ul{
