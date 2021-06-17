@@ -5,7 +5,7 @@ import pymongo
 import random
 
 print("connecting db 1..")
-client = pymongo.MongoClient('mongodb+srv://app:db1@sugatcart.helis.mongodb.net/SugatCart?retryWrites=true&w=majority')
+client = pymongo.MongoClient('mongodb+srv://app:dbdb1@sugatcart.jajup.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 database = client["SugatCart"]
 products = database["products"]
 users = database["users"]
