@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, make_response, request
 from bson.objectid import ObjectId
 from flask_pymongo import PyMongo
 import pymongo
+import random
 
 print("connecting db 1..")
 client = pymongo.MongoClient('mongodb+srv://app:db1@sugatcart.helis.mongodb.net/SugatCart?retryWrites=true&w=majority')
@@ -19,6 +20,7 @@ print("connected db 2..")
 @app.route("/") # root endpoint
 def root():
     products_tosend = list(products.find())
+    random.shuffle(products_tosend)
     return render_template("index.html", products_tosend=products_tosend), 200
 
 @app.route("/upload_product00", methods=["Get", "POST"]) # to upload product (shhh nobody knows)
