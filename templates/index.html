@@ -88,28 +88,7 @@
 
 
     <!-- main -->
-    <h1>Head Phones</h1>
-    <!--  -->
-    <div class="product-cards">
-        {% for product in products_tosend %}
-        {% if product["type"] =="headphones" %}
-            <div class="product-card">
-                <div class="_3fGk"><img role="presentation"
-                        alt="Cosmic Byte H1 Over ear Gaming Headsets With Mic - Blue"
-                        src="/product_view/{{product['_id']}}.png">
-                </div>
-                <div class="_11Dh">
-                    <span class="_3ZIv">&#8377; {{product["Selling"]}}</span>
-                </div>
-                <h5>{{product["name"]|capitalize}}</h5>
-                <div class="wnaE">offers {{product["off"]}}%</div>
-                <div class="wnaE">Cost &#8377; {{product["main-cost"]}}</div>
-                <!-- <a class="btn btn-primary" href="/view_id={{product['_id']}}"><i class="fas fa-eye"></i> View</a> -->
-                <a class="btn btn-primary" href="/addtocart={{product['_id']}}">Add to Cart</a>
-            </div>
-        {% endif %}
-        {% endfor %}
-    </div>
+    
     <h1>Mobile</h1>
     <!--  -->
     <div class="product-cards">
@@ -133,6 +112,29 @@
         {% endfor %}
     </div>
     <h1>Mobile Accessories</h1>
+    <!--  -->
+    <h1>Head Phones</h1>
+    <!--  -->
+    <div class="product-cards">
+        {% for product in products_tosend %}
+        {% if product["type"] =="headphones" %}
+            <div class="product-card">
+                <div class="_3fGk"><img role="presentation"
+                        alt="Cosmic Byte H1 Over ear Gaming Headsets With Mic - Blue"
+                        src="/product_view/{{product['_id']}}.png">
+                </div>
+                <div class="_11Dh">
+                    <span class="_3ZIv">&#8377; {{product["Selling"]}}</span>
+                </div>
+                <h5>{{product["name"]|capitalize}}</h5>
+                <div class="wnaE">offers {{product["off"]}}%</div>
+                <div class="wnaE">Cost &#8377; {{product["main-cost"]}}</div>
+                <!-- <a class="btn btn-primary" href="/view_id={{product['_id']}}"><i class="fas fa-eye"></i> View</a> -->
+                <a class="btn btn-primary" href="/addtocart={{product['_id']}}">Add to Cart</a>
+            </div>
+        {% endif %}
+        {% endfor %}
+    </div>
     <!--  -->
     <div class="product-cards">
         {% for product in products_tosend %}
