@@ -1,3 +1,4 @@
+from typing import List
 from flask import Flask, render_template, redirect, make_response, request
 from bson.objectid import ObjectId
 from flask_pymongo import PyMongo
@@ -105,6 +106,8 @@ def cheakout():
     try:        
         id = request.cookies.get("_id")
         user = dict(users.find_one({"_id": ObjectId(f"{id}")}))
+        del user["_id"]
+        users.update_one({"_id": ObjectId(f"{id}")},  {'$set':{"cart": List[None], "total_cart_cost":float(0)}})
     except Exception:
         return redirect('/')
     users.update_one({"_id":ObjectId(f"{id}")}, {"$set" : {"cart": [], "total_cart_cost":float(0)}})
