@@ -98,7 +98,6 @@ plyer==2.0.0
 prometheus-client==0.9.0
 prompt-toolkit==3.0.16
 protobuf==3.17.0
-PyAudio @ file:///C:/Users/Kishor%20Bagde/Downloads/PyAudio-0.2.11-cp39-cp39-win_amd64.whl
 PyAutoGUI==0.9.52
 pycodestyle==2.6.0
 pycparser==2.20
