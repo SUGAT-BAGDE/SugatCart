@@ -93,21 +93,12 @@ def mycart():
 
 @app.route("/query", methods=["POST"])
 def query():
-    products_found = list(products.find())
-    products =[]
-    q = request.form["query"]
+    products_found = []
     if request.form["type"] == "type":
-        # products_found = list(products.find({"type":request.form["query"].lower()}))
-        for i in products_found:
-            if q in i["name"]:
-                products.append(q)
-        return render_template("query.html", items=products)
+        products_found = list(products.find({"type":request.form["query"].lower()}))
     if request.form["type"] == "name":
-        # products_found = list(products.find({"name":request.form["query"].lower()}))
-        for i in products_found:
-            if q in i["name"]:
-                products.append(q)
-    return render_template("query.html", items=products)
+        products_found = list(products.find({"name":request.form["query"].lower()}))
+    return render_template("query.html", items=products_found)
 
 @app.route('/cheakout')
 def cheakout():
