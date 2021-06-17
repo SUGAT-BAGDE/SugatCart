@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SugatCart | Electronic Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"
+        defer></script>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+<body>
+    <!-- nav and all-->
+    <nav id="pc-nav">
+        <ul>
+            <li id="hamburger" onclick="hamburger()"><a>&#9776;</a></li>
+            <li><a>Home</a></li>
+            <li><a>About</a></li>
+            <li><a>Contact Us</a></li>
+        </ul>
+    </nav>
+    <!-- <div id="hamburger_background"> -->
+    <div id="hamburger_menu">
+        <h1><a href="/mycart">Your Cart</a></h1>
+        <h1><a href="/create_Account">Create Account</a></h1>
+        <h1><a href="/log_in">Log In</a></h1>
+        <form action="/query" method="POST" class="search">
+            <input type="text" name="query" id="query" required>
+            <div><input type="radio" name="type" id="cheakbox" value="type"><label for="cheakbox">Search By Type</label>
+            </div>
+            <div><input type="radio" name="type" id="cheakbox" value="name"><label for="cheakbox">Search By Name</label>
+            </div>
+            <button type="submit" class="btn">Search</button>
+        </form>
+    </div>
+    <!-- </div> -->
+    <!-- sliders -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    {% if items|length == 0 %}
+    <div class="alert alert-dark" role="alert" style="margin: 10px;">
+        Can't Find That You Wish
+      </div>
+    {% endif %}
+    <div class="product-cards cart">
+        {% for product in items %}
+        <div class="product-card">
+            <div class="_3fGk"><img role="presentation" alt="Cosmic Byte H1 Over ear Gaming Headsets With Mic - Blue"
+                    src="/product_view//{{product['_id']}}.png">
+            </div>
+            <div class="_11Dh">
+                <span class="_3ZIv">&#8377; {{product["Selling"]}}</span>
+            </div>
+            <h5>{{product["name"]|capitalize}}</h5>
+            <div class="wnaE">offers {{product["off"]}}%</div>
+            <div class="wnaE">Cost &#8377; {{product["main-cost"]}}</div>
+            <a class="btn btn-primary" href="/addtocart={{product['_id']}}">Add to Cart</a>
+        </div>   
+        {% endfor %}
+    </div>
+
+    <script src="/static/js/index.js"></script>
+</body>
+
+</html>
