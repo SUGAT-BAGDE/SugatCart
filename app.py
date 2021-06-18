@@ -18,6 +18,16 @@ app.config["MONGO_URI"] = 'mongodb+srv://app:db1@sugatcart.helis.mongodb.net/Sug
 mongo = PyMongo(app)
 print("connected db 2..")
 
+def matches(sen1, sen2):
+    sc = 0
+    sen1 = sen1["name"].lower().split(" ")
+    sen2 = sen2.lower().split(" ")
+    for se1 in sen1:
+        for se2 in sen2:
+            if se1 == se2:
+                sc += 1
+    return sc
+
 @app.route("/") # root endpoint
 def root():
     products_tosend = list(products.find())
@@ -98,7 +108,15 @@ def query():
     if request.form["type"] == "type":
         products_found = list(products.find({"type":request.form["query"].lower()}))
     if request.form["type"] == "name":
-        products_found = list(products.find({"name":request.form["query"].lower()}))
+        input = request.form["query"]
+        sentences = list(products.find())
+        l = [matches(sentence,input) for sentence in sentences]
+        l = list(zip(l,sentences))
+        l = sorted(l, key=lambda  x: x[0])
+        l.reverse()
+        for i in l:
+            if i[0] != 0:
+                products_found.append(i[1])
     return render_template("query.html", items=products_found)
 
 @app.route('/cheakout')
