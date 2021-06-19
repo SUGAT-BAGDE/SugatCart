@@ -28,8 +28,12 @@
     <!-- <div id="hamburger_background"> -->
     <div id="hamburger_menu">
         <h1><a href="/mycart">Your Cart</a></h1>
+        {% if login == False %}
         <h1><a href="/create_Account">Create Account</a></h1>
         <h1><a href="/log_in">Log In</a></h1>
+        {% else %}
+        <h1><a href="/log_out">Log Out</a></h1>   
+        {% endif %}        
         <form action="/query" method="POST" class="search">
             <input type="text" name="query" id="query" required>
             <div><input type="radio" name="type" id="cheakbox" value="type"><label for="cheakbox">Search By Type</label>

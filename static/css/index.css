@@ -145,3 +145,7 @@ h1{
 .search div{
     width: 50vw;
 }
+#cart_message{
+    display: block;
+    text-align: center;
+}

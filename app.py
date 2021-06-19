@@ -1,6 +1,7 @@
 from typing import List
 from flask import Flask, render_template, redirect, make_response, request
 from bson.objectid import ObjectId
+from flask.helpers import url_for
 from flask_pymongo import PyMongo
 import pymongo
 import random
@@ -32,7 +33,9 @@ def matches(sen1, sen2):
 def root():
     products_tosend = list(products.find())
     random.shuffle(products_tosend)
-    return render_template("index.html", products_tosend=products_tosend), 200
+    if request.cookies.get("_id") == None:
+        return render_template("index.html", products_tosend=products_tosend, login=False), 200
+    return render_template("index.html", products_tosend=products_tosend, login=True), 200
 
 @app.route("/upload_product00", methods=["Get", "POST"]) # to upload product (shhh nobody knows)
 def upload_product00():
@@ -78,6 +81,8 @@ def login():
 @app.route("/addtocart=<id>")
 def add_to_cart(id):
     user_id = request.cookies.get("_id")
+    if user_id == None:
+        return redirect("/log_in")
     product_cost = products.find_one({"_id":ObjectId(id)})["Selling"]
     product_id = products.find_one({"_id":ObjectId(id)})["_id"]
     user = dict(users.find_one({"_id" : ObjectId(f"{user_id}")}))
@@ -93,10 +98,10 @@ def add_to_cart(id):
 @app.route("/mycart")
 def mycart():
     items = []
-    try:
-        user = users.find_one({"_id": ObjectId(request.cookies.get("_id"))})
-    except Exception:
+    cookie_user = request.cookies.get("_id")
+    if cookie_user == None:
         return redirect("/log_in")
+    user = users.find_one({"_id": ObjectId(request.cookies.get("_id"))})
     for product_id in user["cart"]:
         items.append(products.find_one({"_id":ObjectId(f"{product_id}")}))
     cost = user["total_cart_cost"]
@@ -135,6 +140,13 @@ def cheakout():
 @app.route("/product_view/<id>")
 def nkviuh(id):
     return mongo.send_file(id)
+
+@app.route("/log_out")
+def log_out():
+    print(url_for(root))
+    resp = make_response(redirect("/"))
+    resp.set_cookie('username', expires=0)
+    return resp
 
 if __name__ == '__main__':
     app.run(port=80, debug=True)
