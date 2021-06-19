@@ -125,7 +125,7 @@ def cheakout():
         id = request.cookies.get("_id")
         user = dict(users.find_one({"_id": ObjectId(f"{id}")}))
         del user["_id"]
-        users.update_one({"_id": ObjectId(f"{id}")},  {'$set':{"cart": List[None], "total_cart_cost":float(0)}})
+        users.update_one({"_id": ObjectId(f"{id}")},  {'$set':{"cart": [], "total_cart_cost":float(0)}})
     except Exception:
         return redirect('/')
     users.update_one({"_id":ObjectId(f"{id}")}, {"$set" : {"cart": [], "total_cart_cost":float(0)}})
