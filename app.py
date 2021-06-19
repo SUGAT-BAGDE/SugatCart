@@ -15,7 +15,7 @@ print("connected db 1..")
 
 print("connecting db 2..")
 app = Flask(__name__)
-app.config["MONGO_URI"] = 'mongodb://localhost:27017'
+app.config["MONGO_URI"] = 'mongodb://localhost:27017/SugatCart'
 mongo = PyMongo(app)
 print("connected db 2..")
 
