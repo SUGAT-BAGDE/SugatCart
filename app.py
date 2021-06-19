@@ -7,7 +7,7 @@ import pymongo
 import random
 
 print("connecting db 1..")
-client = pymongo.MongoClient('mongodb+srv://app:dbdb1@sugatcart.jajup.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+client = pymongo.MongoClient('mongodb://localhost:27017')
 database = client["SugatCart"]
 products = database["products"]
 users = database["users"]
@@ -15,7 +15,7 @@ print("connected db 1..")
 
 print("connecting db 2..")
 app = Flask(__name__)
-app.config["MONGO_URI"] = 'mongodb+srv://app:db1@sugatcart.helis.mongodb.net/SugatCart?retryWrites=true&w=majority'
+app.config["MONGO_URI"] = 'mongodb://localhost:27017'
 mongo = PyMongo(app)
 print("connected db 2..")
 
